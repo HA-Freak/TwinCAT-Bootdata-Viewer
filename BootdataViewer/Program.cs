@@ -76,13 +76,9 @@ static class Program
             }
         }
 
-#if NET
-        ApplicationConfiguration.Initialize();
-#else
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
-        SetProcessDPIAware();   // like HighDpiMode.SystemAware on .NET 8; keeps text sharp
-#endif
+        SetProcessDPIAware();   // system DPI aware, keeps text sharp on scaled displays
         Application.Run(new MainForm(GuiOptions(args)));
         return 0;
     }

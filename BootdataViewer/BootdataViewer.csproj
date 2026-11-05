@@ -2,22 +2,19 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <!-- net481 runs on any Windows 10/11 without installing a .NET runtime; Compat.cs fills the API gaps. -->
-    <TargetFrameworks>net8.0-windows;net481</TargetFrameworks>
+    <!-- .NET Framework 4.8.1 is part of Windows 10/11, so no .NET runtime has to be installed;
+         Compat.cs supplies the newer APIs the code uses. -->
+    <TargetFramework>net481</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
     <AssemblyName>BootdataViewer</AssemblyName>
     <RootNamespace>BootdataViewer</RootNamespace>
-    <RollForward>Major</RollForward>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Beckhoff.TwinCAT.Ads" Version="7.0.389" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
     <PackageReference Include="System.Memory" Version="4.5.5" />
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
     <Reference Include="System.Net.Http" />

@@ -72,7 +72,7 @@ lives in its `Viewer` subfolder and gets the Start menu entry *TwinCAT XAE Bootd
 ### Standalone
 
 `BootdataViewer.exe` (from `BootdataViewer\bin\Release\net481`) runs without installation on
-Windows 10/11 (.NET Framework 4.8.1); copy the whole folder. A .NET 8 build is produced as well.
+Windows 10/11 (.NET Framework 4.8.1, part of Windows); copy the whole folder.
 
 ## Usage
 
@@ -116,7 +116,7 @@ BootdataViewer.exe --write <file> [--target <AmsNetId>|local] [--port <n>] [--fi
 
 ## Building
 
-Requirements: .NET SDK 8, Visual Studio 2022 with the *Visual Studio extension development*
+Requirements: .NET SDK (8 or newer, for building), Visual Studio 2022 with the *Visual Studio extension development*
 workload, TwinCAT 3.1 4026 with TcPkg (for packaging).
 
 ```powershell
@@ -131,7 +131,7 @@ Output: `TcPkg\out\*.nupkg`. The version is taken from
 
 | Folder | Content |
 |---|---|
-| `BootdataViewer` | viewer and command line tool (WinForms; `net481` and `net8.0-windows`) |
+| `BootdataViewer` | viewer and command line tool (WinForms, .NET Framework 4.8.1) |
 | `BootdataViewer.VsExtension` | VSIX for VS 2022/2026 and TcXaeShell; starts the bundled viewer out of process |
 | `TcPkg` | nuspecs, install scripts (`shared`), build script, icon, public signing certificate |
 

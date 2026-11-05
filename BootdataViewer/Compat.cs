@@ -3,17 +3,13 @@ using System.Text.RegularExpressions;
 
 namespace BootdataViewer
 {
-    // APIs that differ between .NET 8 and .NET Framework 4.8.1, used by both builds.
+    // Helpers for APIs that .NET Framework 4.8.1 lacks (newer .NET has them built in).
     static class Compat
     {
         static readonly System.Globalization.CultureInfo Inv = System.Globalization.CultureInfo.InvariantCulture;
 
-        // Shortest text that parses back to the same value ("R" on .NET 8). .NET Framework's "R"
-        // can give 17 digits or, for some doubles, text that does not round-trip at all.
-#if NET
-        public static string RoundTrip(double d) => d.ToString("R", Inv);
-        public static string RoundTrip(float f) => f.ToString("R", Inv);
-#else
+        // Shortest text that parses back to the same value. .NET Framework's "R" can give 17 digits
+        // or, for some doubles, text that does not round-trip at all.
         public static string RoundTrip(double d)
         {
             if (double.IsNaN(d) || double.IsInfinity(d)) return d.ToString(Inv);
@@ -35,16 +31,7 @@ namespace BootdataViewer
             }
             return f.ToString("G9", Inv);
         }
-#endif
 
-#if NET
-        public static Encoding Latin1 => Encoding.Latin1;
-        public static DateTime UnixEpoch => DateTime.UnixEpoch;
-        public static long Clamp(long value, long min, long max) => Math.Clamp(value, min, max);
-        public static bool IsFinite(double d) => double.IsFinite(d);
-        public static string ToHexString(byte[] d, int offset, int length) => Convert.ToHexString(d, offset, length);
-        public static byte[] FromHexString(string s) => Convert.FromHexString(s);
-#else
         public static readonly Encoding Latin1 = Encoding.GetEncoding(28591);
         public static readonly DateTime UnixEpoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         public static long Clamp(long value, long min, long max) => value < min ? min : value > max ? max : value;
@@ -60,12 +47,10 @@ namespace BootdataViewer
                 bytes[i] = byte.Parse(s.Substring(i * 2, 2), System.Globalization.NumberStyles.HexNumber);
             return bytes;
         }
-#endif
     }
 }
 
-#if NETFRAMEWORK
-// The rest fills gaps in .NET Framework 4.8.1 for the net481 build only.
+// The rest fills gaps in .NET Framework 4.8.1 (types and overloads the code uses from newer .NET).
 namespace BootdataViewer
 {
     // Shadows System.BitConverter inside this namespace, adding the span overloads of .NET Core.
@@ -188,4 +173,3 @@ namespace System
         }
     }
 }
-#endif

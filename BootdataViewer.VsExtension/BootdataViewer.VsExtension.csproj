@@ -83,7 +83,7 @@
   <!-- Bundle the viewer (exe + its DLLs) under Viewer\ in the VSIX. -->
   <Target Name="IncludeViewer" BeforeTargets="GetVsixSourceItems">
     <Error Condition="!Exists('$(ViewerBuildDir)BootdataViewer.exe')"
-           Text="Viewer not built. Run: dotnet build ..\BootdataViewer -c Release -f net481" />
+           Text="Viewer not built. Run: dotnet build ..\BootdataViewer -c Release" />
     <ItemGroup>
       <ViewerFile Include="$(ViewerBuildDir)*.exe;$(ViewerBuildDir)*.dll;$(ViewerBuildDir)*.config" />
       <VSIXSourceItem Include="@(ViewerFile)">

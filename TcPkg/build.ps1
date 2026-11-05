@@ -37,7 +37,7 @@ if (-not $Version) { $Version = ([xml](Get-Content $manifest)).PackageManifest.M
 Write-Host "== Version $Version"
 
 Write-Host '== Building viewer (net481)'
-dotnet build (Join-Path $root 'BootdataViewer') -c Release -f net481 -nologo -v q
+dotnet build (Join-Path $root 'BootdataViewer') -c Release -nologo -v q
 if ($LASTEXITCODE) { throw 'Viewer build failed.' }
 Write-Host '== Building Visual Studio extension'
 & $msbuild (Join-Path $root 'BootdataViewer.VsExtension\BootdataViewer.VsExtension.csproj') -restore -p:Configuration=Release -nologo -v:minimal

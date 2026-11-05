@@ -70,9 +70,8 @@ public sealed class WriteDialog : Form
         _target.Text = string.IsNullOrWhiteSpace(target) ? "local" : target;
         _port.Text = _defaultPort.ToString();
         _filter.Text = filter ?? "";
-#if NET
-        _filter.PlaceholderText = "e.g. MAIN.fbConveyor";   // not available in .NET Framework WinForms
-#endif
+        // .NET Framework WinForms has no placeholder text; the hint is a tooltip instead.
+        new ToolTip().SetToolTip(_filter, "Only variables whose name starts with this text, e.g. MAIN.fbConveyor");
 
         var bar = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 36, Padding = new Padding(4), WrapContents = false };
         bar.Controls.AddRange(new Control[]
