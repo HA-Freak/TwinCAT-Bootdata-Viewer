@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>TwinCAT.XAE.BootdataViewer.VS2022</id>
+    <version>$version$</version>
+    <title>TwinCAT XAE Bootdata Viewer for Visual Studio 2022</title>
+    <authors>HA-Freak</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">tools\LICENSE.txt</license>
+    <icon>icon.png</icon>
+    <description>Integrates the TwinCAT XAE Bootdata Viewer into Visual Studio 2022 with TwinCAT XAE: TwinCAT &gt; Bootdata opens the bootdata of the selected PLC from the active target, compares/writes it to the PLC and opens .bootdata files.</description>
+    <summary>TwinCAT XAE Bootdata Viewer extension for Visual Studio 2022.</summary>
+    <tags>TwinCAT XAE Bootdata VS2022 UpdateConfigurationOption</tags>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+    <file src="icon.png" target="" />
+  </files>
+</package>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>TwinCAT.XAE.BootdataViewer</id>
+    <version>$version$</version>
+    <title>TwinCAT XAE Bootdata Viewer</title>
+    <authors>HA-Freak</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">tools\LICENSE.txt</license>
+    <icon>icon.png</icon>
+    <description>Viewer and editor for TwinCAT 3 persistent data files (Port_xxx.bootdata): shows values with their datatypes, edits and saves them, checks files for corruption and recovers intact values, reads the file from any target over ADS, and compares/writes the values back into a running PLC by symbol name.</description>
+    <summary>Open, check, edit and restore TwinCAT persistent data (bootdata).</summary>
+    <tags>TwinCAT XAE Workload CategoryGeneral VariantXAE Bootdata Persistent PLC ADS Tool VS2022 VS2026 TCXAESHELL64</tags>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+    <file src="icon.png" target="" />
+  </files>
+</package>

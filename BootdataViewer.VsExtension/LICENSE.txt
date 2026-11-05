@@ -1,0 +1,5 @@
+TwinCAT XAE Bootdata Viewer - Visual Studio integration
+
+Provided as is, without warranty of any kind. Writing values into a PLC changes a running
+machine; check the values before you write them. TwinCAT and Beckhoff are trademarks of
+Beckhoff Automation GmbH; this extension is not affiliated with Beckhoff.

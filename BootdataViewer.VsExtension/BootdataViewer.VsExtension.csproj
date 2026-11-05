@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- VSIX for Visual Studio 2022 and TwinCAT XAE Shell (TcXaeShell, VS 2022 based).
+       Build with Visual Studio's MSBuild:  msbuild -restore -p:Configuration=Release
+       The viewer runs out of process (bundled net481 build in the Viewer folder), so the
+       TwinCAT.Ads version it uses never conflicts with the one loaded by TwinCAT XAE. -->
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{5B1F7C2E-8E43-4C3A-9D5F-2A61B0E4C7D1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BootdataViewer.VsExtension</RootNamespace>
+    <AssemblyName>BootdataViewer.VsExtension</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <GeneratePkgDefFile>true</GeneratePkgDefFile>
+    <UseCodebase>true</UseCodebase>
+    <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
+    <IncludeDebugSymbolsInVSIXContainer>false</IncludeDebugSymbolsInVSIXContainer>
+    <IncludeDebugSymbolsInLocalVSIXDeployment>false</IncludeDebugSymbolsInLocalVSIXDeployment>
+    <CopyBuildOutputToOutputDirectory>true</CopyBuildOutputToOutputDirectory>
+    <CopyOutputSymbolsToOutputDirectory>true</CopyOutputSymbolsToOutputDirectory>
+    <DeployExtension>false</DeployExtension>
+    <StartAction>Program</StartAction>
+    <StartProgram Condition="'$(DevEnvDir)' != ''">$(DevEnvDir)devenv.exe</StartProgram>
+    <StartArguments>/rootsuffix Exp</StartArguments>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <DebugType>portable</DebugType>
+    <Optimize Condition="'$(Configuration)' == 'Release'">true</Optimize>
+    <DefineConstants Condition="'$(Configuration)' == 'Debug'">DEBUG;TRACE</DefineConstants>
+    <DefineConstants Condition="'$(Configuration)' == 'Release'">TRACE</DefineConstants>
+    <!-- Where the net481 viewer build comes from. -->
+    <ViewerBuildDir>$(MSBuildThisFileDirectory)..\BootdataViewer\bin\Release\net481\</ViewerBuildDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="BootdataPackage.cs" />
+    <Compile Include="BootdataEditorFactory.cs" />
+    <Compile Include="TwinCatContext.cs" />
+    <Compile Include="ViewerLauncher.cs" />
+    <Compile Include="PlcChooser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="source.extension.vsixmanifest">
+      <SubType>Designer</SubType>
+    </None>
+    <VSCTCompile Include="BootdataCommands.vsct">
+      <ResourceName>Menus.ctmenu</ResourceName>
+    </VSCTCompile>
+    <Content Include="LICENSE.txt">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <!-- Same icon as the TcPkg packages (drawn by TcPkg\icon\make-icon.ps1). -->
+    <Content Include="..\TcPkg\icon\icon.png">
+      <Link>icon.png</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <EmbeddedResource Include="VSPackage.resx">
+      <MergeWithCTO>true</MergeWithCTO>
+      <ManifestResourceName>VSPackage</ManifestResourceName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.0.32112.339" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.9.3168" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
+
+  <!-- Bundle the viewer (exe + its DLLs) under Viewer\ in the VSIX. -->
+  <Target Name="IncludeViewer" BeforeTargets="GetVsixSourceItems">
+    <Error Condition="!Exists('$(ViewerBuildDir)BootdataViewer.exe')"
+           Text="Viewer not built. Run: dotnet build ..\BootdataViewer -c Release -f net481" />
+    <ItemGroup>
+      <ViewerFile Include="$(ViewerBuildDir)*.exe;$(ViewerBuildDir)*.dll;$(ViewerBuildDir)*.config" />
+      <VSIXSourceItem Include="@(ViewerFile)">
+        <VSIXSubPath>Viewer</VSIXSubPath>
+      </VSIXSourceItem>
+    </ItemGroup>
+  </Target>
+</Project>

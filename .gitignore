@@ -1,0 +1,16 @@
+# Build output
+bin/
+obj/
+.vs/
+*.user
+
+# TcPkg packaging
+TcPkg/_stage/
+TcPkg/out/
+*.nupkg
+*.vsix
+
+# Signing keys - never commit private keys (the public TcPkg\BootdataViewer-signing.cer is fine)
+*.pfx
+*.p12
+*.snk

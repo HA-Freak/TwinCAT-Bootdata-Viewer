@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Extern href="stdidcmd.h" />
+  <Extern href="vsshlids.h" />
+  <Include href="KnownImageIds.vsct" />
+
+  <Commands package="guidBootdataPackage">
+    <Menus>
+      <!-- TwinCAT > Bootdata -->
+      <Menu guid="guidBootdataCmdSet" id="BootdataMenu" priority="0x0100" type="Menu">
+        <Parent guid="guidBootdataCmdSet" id="TwinCatMenuGroup" />
+        <Strings>
+          <ButtonText>&amp;Bootdata</ButtonText>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <Groups>
+      <!-- Last but one group of the TwinCAT main menu (its groups use priorities 0x0080..0x0800). -->
+      <Group guid="guidBootdataCmdSet" id="TwinCatMenuGroup" priority="0x0780">
+        <Parent guid="guidTwinCatMenu" id="TwinCatMenu" />
+      </Group>
+      <Group guid="guidBootdataCmdSet" id="MenuGroup" priority="0x0100">
+        <Parent guid="guidBootdataCmdSet" id="BootdataMenu" />
+      </Group>
+      <Group guid="guidBootdataCmdSet" id="ViewerGroup" priority="0x0200">
+        <Parent guid="guidBootdataCmdSet" id="BootdataMenu" />
+      </Group>
+      <!-- Context menus: TwinCAT / PLC project nodes, and .bootdata items -->
+      <Group guid="guidBootdataCmdSet" id="ProjectContextGroup" priority="0x0700">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE" />
+      </Group>
+      <Group guid="guidBootdataCmdSet" id="ItemContextGroup" priority="0x0100">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE" />
+      </Group>
+    </Groups>
+
+    <Buttons>
+      <Button guid="guidBootdataCmdSet" id="cmdOpenActive" priority="0x0100" type="Button">
+        <Parent guid="guidBootdataCmdSet" id="MenuGroup" />
+        <Icon guid="ImageCatalogGuid" id="Download" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <Strings>
+          <ButtonText>&amp;Open Bootdata of Active PLC</ButtonText>
+          <ToolTipText>Reads Port_xxx.bootdata of the selected PLC from the active TwinCAT target and opens it</ToolTipText>
+        </Strings>
+      </Button>
+      <Button guid="guidBootdataCmdSet" id="cmdOpenActiveOld" priority="0x0110" type="Button">
+        <Parent guid="guidBootdataCmdSet" id="MenuGroup" />
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <Strings>
+          <ButtonText>Open &amp;Previous Bootdata (-old) of Active PLC</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidBootdataCmdSet" id="cmdWriteActive" priority="0x0120" type="Button">
+        <Parent guid="guidBootdataCmdSet" id="MenuGroup" />
+        <Icon guid="ImageCatalogGuid" id="Upload" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <Strings>
+          <ButtonText>&amp;Compare / Write Bootdata to Active PLC...</ButtonText>
+          <ToolTipText>Opens the target's bootdata and compares it with the running PLC; nothing is written without confirmation</ToolTipText>
+        </Strings>
+      </Button>
+      <Button guid="guidBootdataCmdSet" id="cmdOpenViewer" priority="0x0100" type="Button">
+        <Parent guid="guidBootdataCmdSet" id="ViewerGroup" />
+        <Strings>
+          <ButtonText>Bootdata &amp;Viewer...</ButtonText>
+          <ToolTipText>Starts the bootdata viewer without a file</ToolTipText>
+        </Strings>
+      </Button>
+
+      <!-- Same actions on the TwinCAT / PLC project node; hidden for other projects. -->
+      <Button guid="guidBootdataCmdSet" id="cmdOpenActiveCtx" priority="0x0100" type="Button">
+        <Parent guid="guidBootdataCmdSet" id="ProjectContextGroup" />
+        <Icon guid="ImageCatalogGuid" id="Download" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Open Bootdata from Target</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidBootdataCmdSet" id="cmdWriteActiveCtx" priority="0x0110" type="Button">
+        <Parent guid="guidBootdataCmdSet" id="ProjectContextGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Compare / Write Bootdata to PLC...</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidBootdataCmdSet" id="cmdOpenFileCtx" priority="0x0100" type="Button">
+        <Parent guid="guidBootdataCmdSet" id="ItemContextGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Open in Bootdata Viewer</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="guidBootdataPackage" value="{8E3B1C52-6A7D-4F21-9C0E-3D5B7A1F2E84}" />
+    <!-- The TwinCAT main menu of TwinCAT XAE (defined by the "TwinCAT XAE Base" package; read from
+         its compiled command table, not documented by Beckhoff). -->
+    <GuidSymbol name="guidTwinCatMenu" value="{40EE08E0-8FB4-46E9-BAAB-100E60019B7B}">
+      <IDSymbol name="TwinCatMenu" value="0x1001" />
+    </GuidSymbol>
+    <GuidSymbol name="guidBootdataCmdSet" value="{C4A9E2F1-5B3D-4E68-A7C1-9F0B2D4E6A13}">
+      <IDSymbol name="TwinCatMenuGroup" value="0x1000" />
+      <IDSymbol name="BootdataMenu" value="0x1001" />
+      <IDSymbol name="MenuGroup" value="0x1002" />
+      <IDSymbol name="ViewerGroup" value="0x1003" />
+      <IDSymbol name="ProjectContextGroup" value="0x1004" />
+      <IDSymbol name="ItemContextGroup" value="0x1005" />
+      <IDSymbol name="cmdOpenActive" value="0x0100" />
+      <IDSymbol name="cmdOpenActiveOld" value="0x0101" />
+      <IDSymbol name="cmdWriteActive" value="0x0102" />
+      <IDSymbol name="cmdOpenViewer" value="0x0103" />
+      <IDSymbol name="cmdOpenActiveCtx" value="0x0110" />
+      <IDSymbol name="cmdWriteActiveCtx" value="0x0111" />
+      <IDSymbol name="cmdOpenFileCtx" value="0x0120" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

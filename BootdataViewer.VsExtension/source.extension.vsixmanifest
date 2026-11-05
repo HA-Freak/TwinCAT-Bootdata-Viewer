@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="BootdataViewer.VsExtension.6f0d3b4a-2c1e-4f7a-9b8d-5e2a1c3f4d60" Version="1.4.2" Language="en-US" Publisher="HA-Freak" />
+    <DisplayName>TwinCAT XAE Bootdata Viewer</DisplayName>
+    <Description xml:space="preserve">Opens TwinCAT 3 persistent data (Port_xxx.bootdata) of the active target and PLC, compares and writes it back to the PLC, and checks files for corruption.</Description>
+    <License>LICENSE.txt</License>
+    <Icon>icon.png</Icon>
+    <Tags>TwinCAT;Beckhoff;PLC;bootdata;persistent</Tags>
+  </Metadata>
+  <!-- [17.0, 19.0): Visual Studio 2022 (17.x), Visual Studio 2026 (18.x) and TcXaeShell (VS 2022 based).
+       TcXaeShell accepts the same target as Visual Studio; Beckhoff's own extensions use it too. -->
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 19.0)">
+      <ProductArchitecture>amd64</ProductArchitecture>
+    </InstallationTarget>
+    <InstallationTarget Id="Microsoft.VisualStudio.IntegratedShell" Version="[17.0, 19.0)">
+      <ProductArchitecture>amd64</ProductArchitecture>
+    </InstallationTarget>
+  </Installation>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,19.0)" DisplayName="Visual Studio core editor" />
+  </Prerequisites>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+  </Assets>
+</PackageManifest>
