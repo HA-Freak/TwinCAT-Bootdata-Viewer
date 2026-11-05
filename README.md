@@ -9,6 +9,8 @@ When a PLC loses its persistent values (new download, replaced hardware, a corru
 power failure), the last good values are often still in a bootdata file. This tool shows them by
 name and type and writes them back into the running PLC by symbol name.
 
+![Variables with datatypes and values, details and raw bytes of the selected value](docs/screenshots/viewer.png)
+
 ## Features
 
 - **Viewer** - opens `Port_xxx.bootdata` / `.bootdata-old` files of TwinCAT 3.1 (4026) and shows every
@@ -30,6 +32,18 @@ name and type and writes them back into the running PLC by symbol name.
 - **TwinCAT XAE integration** - menu **TwinCAT > Bootdata** opens the bootdata of the selected PLC from
   the active target, compares/writes it, and `.bootdata` files open in the viewer.
 - **Command line** - dump, JSON export, integrity check and scripted compare/write.
+
+## Screenshots
+
+| Edit a value | Embedded datatypes as ST |
+|---|---|
+| ![Edit value dialog with input hint](docs/screenshots/edit-value.png) | ![Datatypes tab with STRUCT and enum declarations](docs/screenshots/datatypes.png) |
+
+| Damaged file detected | Intact values recovered, damaged ones marked red |
+|---|---|
+| ![Warning for a corrupt bootdata file with the integrity report](docs/screenshots/corrupt-warning.png) | ![Variables of a damaged file, two entries marked as damaged](docs/screenshots/corrupt-recovered.png) |
+
+The screenshots use a made-up demo file.
 
 ## Installation
 
