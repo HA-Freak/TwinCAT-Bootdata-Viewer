@@ -390,10 +390,8 @@ public sealed class MainForm : Form
     void OpenWriteDialog()
     {
         if (_file == null) return;   // damaged variables are excluded inside the dialog
-        string? filter = null;
-        for (var n = _tree.SelectedNode; n != null && filter == null; n = n.Parent)
-            filter = (n.Tag as ValueNode)?.SymbolPath;
-        using var dlg = new WriteDialog(_file, filter, _plcTarget ?? AdsBootFiles.SourceTarget(_file.Path), _plcPort);
+        // The name filter starts empty, so all variables are compared; the user can narrow it in the dialog.
+        using var dlg = new WriteDialog(_file, null, _plcTarget ?? AdsBootFiles.SourceTarget(_file.Path), _plcPort);
         dlg.ShowDialog(this);
     }
 
