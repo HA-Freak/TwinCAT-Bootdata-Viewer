@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="BootdataViewer.VsExtension.6f0d3b4a-2c1e-4f7a-9b8d-5e2a1c3f4d60" Version="1.4.2" Language="en-US" Publisher="HA-Freak" />
+    <Identity Id="BootdataViewer.VsExtension.6f0d3b4a-2c1e-4f7a-9b8d-5e2a1c3f4d60" Version="1.4.3" Language="en-US" Publisher="HA-Freak" />
     <DisplayName>TwinCAT XAE Bootdata Viewer</DisplayName>
     <Description xml:space="preserve">Opens TwinCAT 3 persistent data (Port_xxx.bootdata) of the active target and PLC, compares and writes it back to the PLC, and checks files for corruption.</Description>
     <License>LICENSE.txt</License>
