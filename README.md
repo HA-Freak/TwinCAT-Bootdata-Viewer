@@ -69,11 +69,6 @@ tcpkg install TwinCAT.XAE.BootdataViewer
 The extension is installed to `<IDE>\Common7\IDE\Extensions\BootdataViewer\BootdataViewer`; the viewer
 lives in its `Viewer` subfolder and gets the Start menu entry *TwinCAT XAE Bootdata Viewer*.
 
-### Standalone
-
-`BootdataViewer.exe` (from `BootdataViewer\bin\Release\net481`) runs without installation on
-Windows 10/11 (.NET Framework 4.8.1, part of Windows); copy the whole folder.
-
 ## Usage
 
 ### In TwinCAT XAE
