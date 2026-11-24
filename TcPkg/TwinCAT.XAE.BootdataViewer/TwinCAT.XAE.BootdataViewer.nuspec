@@ -12,6 +12,10 @@
     <summary>Open, check, edit and restore TwinCAT persistent data (bootdata).</summary>
     <!-- VS2022 VS2026 TCXAESHELL64 tell TcPkg which IDE packages (.VS2022 / .VS2026 / .TcXaeShell64) to install. -->
     <tags>Workload CategoryGeneral VariantXAE VS2022 VS2026 TCXAESHELL64</tags>
+    <!-- Makes TcPkg list the package as a workload (tcpkg list -t workload), like TwinCAT.Standard.XAE. -->
+    <packageTypes>
+      <packageType name="Workload" />
+    </packageTypes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

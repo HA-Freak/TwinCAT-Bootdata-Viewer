@@ -3,6 +3,6 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("TwinCAT XAE Bootdata Viewer - Visual Studio integration")]
 [assembly: AssemblyProduct("BootdataViewer.VsExtension")]
-[assembly: AssemblyVersion("1.4.4.0")]
-[assembly: AssemblyFileVersion("1.4.4.0")]
+[assembly: AssemblyVersion("1.4.5.0")]
+[assembly: AssemblyFileVersion("1.4.5.0")]
 [assembly: ComVisible(false)]
